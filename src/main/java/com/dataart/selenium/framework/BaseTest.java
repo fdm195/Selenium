@@ -13,7 +13,7 @@ public class BaseTest {
         BasePage.settings = settings;
         BasePage.driver.get(settings.getBaseUrl());
         BasePage.driver.manage().window().maximize();
-        BasePage.driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+        BasePage.driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);//TODO implicitlyWait
     }
 
     @AfterSuite(alwaysRun = true)

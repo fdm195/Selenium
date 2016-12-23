@@ -8,18 +8,28 @@ import org.openqa.selenium.support.FindBy;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class HeaderPage extends BasicPage {
-    @FindBy(xpath = EDITACCOUNT)
+    @FindBy(xpath = EDITACCOUNT_XPATH)
     WebElement editAccountLink;
-    @FindBy(xpath = MYAPLICATION)
+    @FindBy(xpath = MYAPLICATION_XPATH)
     WebElement myAplicationLink;
-    public HomePage editAccount(){
+    @FindBy(xpath = AJAX_TEST_LINK_XPATH)
+    WebElement ajaxLink;
+
+    public void clickEditAccount(){
         editAccountLink.click();
-        return null;
+    }
+    public void clickAjaxTestPageLink(){
+        ajaxLink.click();
     }
 
     public String getWelcomeMessage() {
         return driver.findElement(By.cssSelector(".welcome")).getText();
     }
+    public String getTitleText(){
+        return driver.findElement(By.xpath("//div[contains(text(), 'Selenium test application')]")).getText();}
+     public void assertTitle(){
+        assertThat(getTitleText()).isEqualTo("Selenium test application");
+     }
 
     public void assertHeader(User user){
         assertThat(getWelcomeMessage()).isEqualTo("Welcome " + user.getFname() + " " + user.getLname());
@@ -27,12 +37,13 @@ public class HeaderPage extends BasicPage {
     public void assertHederReg(User user){
         assertThat(getWelcomeMessage()).isEqualTo("Welcome " + user.getFname() + " " + user.getLname());
     }
-    public boolean elementIsNotPresent(String xpath){
+    public boolean elementIsNotPresent(){
         return driver.findElements(By.xpath("//a[contains(text(), 'My applications')]")).isEmpty();
     }
 
 
     public HeaderPage myAplicationClic(){myAplicationLink.click(); return null;}
-    public static final String EDITACCOUNT = "//a[contains(text(), 'Edit account')]";
-    public static final String MYAPLICATION = "//a[contains(text(), 'My applications')]";
+    public static final String EDITACCOUNT_XPATH = "//a[contains(text(), 'Edit account')]";
+    public static final String MYAPLICATION_XPATH = "//a[contains(text(), 'My applications')]";
+    public static final String AJAX_TEST_LINK_XPATH = "//a[contains(text(), 'Ajax test page')]";
 }

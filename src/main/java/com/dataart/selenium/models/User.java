@@ -1,6 +1,14 @@
 package com.dataart.selenium.models;
 
+import com.dataart.selenium.pages.RegistrationPage;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+
 import java.util.ArrayList;
+
+import static com.dataart.selenium.framework.BasePage.driver;
+import static com.dataart.selenium.framework.BasePage.initPage;
 
 public class User {
     private String username;
@@ -8,7 +16,7 @@ public class User {
     private String passwordconfirm;
     private String fname;
     private String lname;
-    private ArrayList role;
+    private Object[][] arrayRegistration5UserWithDifrentRoles;
 
     public User(String username, String password) {
         this.username = username;
@@ -16,13 +24,11 @@ public class User {
     }
 
 
-    public User(String username,String fname,String lname, String password){
+    public User(String username,String fname,String lname, String password,String role){
         this.username=username;
         this.fname=fname;
         this.lname=lname;
         this.password=password;
-
-
 
     }
 
@@ -58,7 +64,7 @@ public class User {
         this.lname = lname;
     }
 
-    public String getRole0(){ return (String) role.get(0); }
+
 
 
 

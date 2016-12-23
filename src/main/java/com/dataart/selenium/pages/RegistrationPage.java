@@ -27,7 +27,7 @@ public class RegistrationPage extends BasePage {
     WebElement userRole;
     @FindBy(xpath = REGISTR_BUTTON_XPATH)
     WebElement registrButton;
-    public RegistrationPage registrAsUser(User user) {
+    public RegistrationPage registrationUser(User user) {
         userName.clear();
         fistnameText.clear();
         lastnameText.clear();
@@ -38,30 +38,29 @@ public class RegistrationPage extends BasePage {
         lastnameText.sendKeys(user.getLname());
         passwordText.sendKeys(user.getPassword());
         passwordTextConfirm.sendKeys(user.getPassword());
-        //new Select(driver.findElement(By.xpath("//select[@value='USER']")));
-        new Select(driver.findElement(By.name("role"))).selectByValue("USER");
-        registrButton.click();
         return initPage(RegistrationPage.class);
-
     }
-    public RegistrationPage registrAsDeveloper(User user) {
-        userName.clear();
-        fistnameText.clear();
-        lastnameText.clear();
-        passwordText.clear();
-        passwordTextConfirm.clear();
-        userName.sendKeys(user.getUsername());
-        fistnameText.sendKeys(user.getFname());
-        lastnameText.sendKeys(user.getLname());
-        passwordText.sendKeys(user.getPassword());
-        passwordTextConfirm.sendKeys(user.getPassword());
-        //new Select(driver.findElement(By.xpath("//select[@value='DEVELOPER']")));
-        new Select(driver.findElement(By.name("role"))).selectByValue("DEVELOPER");
-        //userRole.findElement(By.name("rol")).click();//неправильная команда
+    public RegistrationPage selectRoleUser(){
+        WebElement selectgender = driver.findElement(By.name("role"));
+        selectgender.sendKeys("USER");
+        return initPage(RegistrationPage.class);
+    }
+
+    public RegistrationPage selectRoleDeveloper(){
+        WebElement selectgender = driver.findElement(By.name("role"));
+        selectgender.sendKeys("DEVELOPER");
+        return initPage(RegistrationPage.class);
+    }
+
+    public void clickRegistrButton(){
         registrButton.click();
-        return initPage(RegistrationPage.class); //RegistrationPage.class);
-
     }
+
+    public RegistrationPage getRegistrationPage() {
+        return initPage(RegistrationPage.class);
+    }
+
+
 
 
     public static final String NAME_TEXT_ID = "name";
