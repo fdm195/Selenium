@@ -5,6 +5,7 @@ import com.dataart.selenium.models.User;
 import com.dataart.selenium.pages.BasicPage;
 import com.dataart.selenium.pages.HeaderPage;
 import com.dataart.selenium.pages.LoginPage;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -45,15 +46,18 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
-    public void loginAndSwitchToTab() {
+    public void loginAndSwitchToTab() throws InterruptedException {
         loginPage.loginAs(user);
         String url=driver.getCurrentUrl();
         basicPage.switchToNewBrowserTab();
         driver.navigate().to(url);
         basicPage.forceLogout();
+        basicPage.waitForElementPresent(By.id("j_username"),3);
         basicPage.switchToPrevTab();
+        driver.manage().deleteAllCookies();
         headerPage=initPage(HeaderPage.class);
         headerPage.clickEditAccount();
+        loginPage=initPage(LoginPage.class);
         Assert.assertTrue(loginPage.isLoginButtonPresent(),"User should be logged out");
     }
 }
