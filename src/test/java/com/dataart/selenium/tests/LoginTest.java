@@ -22,6 +22,7 @@ public class LoginTest extends BaseTest {
 
     @BeforeMethod(alwaysRun = true)
     public void openLoginPage() {
+
         basicPage = initPage(BasicPage.class);
         loginPage = basicPage.forceLogout();
         headerPage = initPage(HeaderPage.class);
