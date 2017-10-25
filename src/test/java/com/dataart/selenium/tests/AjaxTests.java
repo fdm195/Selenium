@@ -25,9 +25,10 @@ public class AjaxTests extends BaseTest {
     public void openLoginPage() {
         basicPage = initPage(BasicPage.class);
         loginPage = basicPage.forceLogout();
-        headerPage = initPage(HeaderPage.class);
         user = denis();
         loginPage.loginAs(user);
+        headerPage = initPage(HeaderPage.class);
+
         headerPage.clickAjaxTestPageLink();
         calculatorPage=initPage(CalculatorPage.class);
     }
@@ -37,8 +38,8 @@ public class AjaxTests extends BaseTest {
         calculatorPage.clickResultButton();
         basicPage.waitForElementPresent(By.id("result"),5);
         calculatorPage.assertPositivResultControl();
-
     }
+
     @Test
     public void enterValidNumberAndString()throws InterruptedException{
         calculatorPage.enterValidNumberAndString();
@@ -47,5 +48,26 @@ public class AjaxTests extends BaseTest {
         calculatorPage.assertNegativResultControl();
         Thread.sleep(2000);
 
+    }
+    @Test
+    public void enterStringAndValidNumberTest(){
+        calculatorPage.enteerStringAndValidNumber();
+        calculatorPage.clickResultButton();
+        basicPage.waitForElementPresent(By.id("result"),5);
+        calculatorPage.assertNegativResultControl();
+    }
+    @Test
+    public void enterDataFromKeyboard(){
+        calculatorPage.enterDataInFildX("5");
+        calculatorPage.enterDataInFildY("45");
+        calculatorPage.clickResultButton();
+        basicPage.waitForElementPresent(By.id("result"),5);
+        calculatorPage.assertPositivResultControl();
+    }
+    @Test
+    public void ClickSumButtonWithoutData(){
+        calculatorPage.clickResultButton();
+        basicPage.waitForElementPresent(By.id("result"),5);
+        calculatorPage.assertNegativResultControl();
     }
 }
